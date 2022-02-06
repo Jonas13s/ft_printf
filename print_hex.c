@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 13:53:12 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:10:32 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:50:51 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,15 @@ static long long	hex_read(t_print *tab, t_length *mod)
 	long long k;
 
 	if (mod->h == 1)
-		k = va_arg(tab->args, int);
+		k = (unsigned short int)va_arg(tab->args,unsigned int);
 	else if (mod->h == 2)
-		k = va_arg(tab->args, int);
+		k = (unsigned char)va_arg(tab->args,unsigned int);
 	else if (mod->l == 1)
-		k = va_arg(tab->args, long);
+		k = (unsigned long int)va_arg(tab->args,unsigned long);
 	else if (mod->l == 2)
-		k = va_arg(tab->args, long long);
+		k = (unsigned long long int)va_arg(tab->args,unsigned long long);
 	else
-		k = va_arg(tab->args, unsigned int);
+		k = va_arg(tab->args,unsigned int);
 	return (k);
 }
 

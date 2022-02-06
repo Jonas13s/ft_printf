@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 14:46:49 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:59:40 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:46:56 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	add_width(const char *format, t_print *tab)
 			tab->minus = 1;
 		}
 		i = 1;
+		tab->total_length += i;
+		return (i);
 	}
 	while (ft_isnumber(format[i]))
 	{
@@ -144,21 +146,37 @@ int	add_conversion(const char *format, t_print *tab, t_length *mod)
 	else if (*format == 'p')
 		tab->content_size = print_pointer(tab);
 	else if (*format == 'o')
-		tab->content_size = print_octal(tab);
+		tab->content_size = print_octal(tab, mod);
 	else if (*format == 'u')
 		tab->content_size = print_unsignedint(tab, mod);
+	else if (*format == 'f')
+		tab->content_size = print_float(tab, mod);
 	else
-		tab->content_size = print_random(format - tab->total_length - 1, tab);
+		tab->content_size = -1;
 	tab->total_length++;
 	return (1);
 }
 
 int	ft_convert_args(const char *format, t_print *tab, t_length *mod)
 {
+	int	k;
+
 	format += add_flags(format, tab);
 	format += add_width(format, tab);
 	format += add_presicion(format, tab);
 	format += add_lengthmod(format, mod, tab);
-	format += add_conversion(format, tab, mod);
+	k += add_conversion(format, tab, mod);
+	if (k == 0)
+	{
+		format -= tab->total_length;
+		print_percent();
+		tab->content_size++;
+		if (*format == '*')
+		{
+			ft_putnbr(tab->width);
+			tab->content_size += number_count(tab->width);
+		}
+	}
+	format += k;
 	return (1);
 }

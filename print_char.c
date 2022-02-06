@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:28:41 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:59:21 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/02 00:28:10 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,4 @@ int	print_char(t_print *tab)
 {
 	print_width(tab);
 	return (tab->width + 1);
-}
-
-int	print_random(const char *s, t_print *tab)
-{
-	int	k;
-
-	k = 0;
-	while(k < tab->total_length + 1)
-	{
-		ft_putchar(s[k]);
-		k++;
-	}
-	return (k);
 }

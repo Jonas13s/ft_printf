@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:54:47 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:13:02 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/01 01:14:00 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int	print_pointer(t_print *tab)
 		printf_left_allign(tab, s);
 	else
 		printf_right_allign(tab, s);
+	ft_strdel(&s);
 	return (tab->content_size);
 }

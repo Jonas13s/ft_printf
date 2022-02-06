@@ -6,13 +6,14 @@
 #    By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 19:01:07 by joivanau          #+#    #+#              #
-#    Updated: 2022/01/31 14:21:43 by joivanau         ###   ########.fr        #
+#    Updated: 2022/02/05 21:07:13 by joivanau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c ft_args.c ft_ischeck.c ft_conv.c print_char.c print_string.c print_signedinteger.c print_hex.c print_pointer.c print_octal.c print_unsignedint.c
+SRC = ft_printf.c ft_args.c ft_ischeck.c ft_conv.c print_char.c print_string.c print_signedinteger.c print_hex.c print_pointer.c print_octal.c print_unsignedint.c ftoa.c
+SRC += print_float.c
 OBJ = $(SRC:.c=.o)
-CFLAGS = -c -Wall -Werror -Wextra
+CFLAGS = -c -O3 -Wall -Werror -Wextra
 NAME = libftprintf.a
 LIBFTPATH = libft/
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:06:25 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:59:23 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:19:05 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	ft_print_char(char c, int i);
 char	*hex_conv(unsigned long long i, char *base);
 int	print_hex(t_print *tab, char *base, t_length *mod);
 int	print_pointer(t_print *tab);
-int	print_octal(t_print *tab);
+int	print_octal(t_print *tab, t_length *mod);
 int print_unsignedint(t_print *tab, t_length *mod);
-int	print_random(const char *s, t_print *tab);
+int print_float(t_print *tab, t_length *mod);
+char	*ftoa(long double value, t_print *tab);
 /* flag set */
 
 #endif

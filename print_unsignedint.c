@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:19:30 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:32:11 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:49:51 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ static unsigned long long	print_read(t_print *tab, t_length *mod)
 	long long k;
 
 	if (mod->h == 1)
-		k = (short int)va_arg(tab->args,unsigned int);
+		k = (unsigned short int)va_arg(tab->args,unsigned int);
 	else if (mod->h == 2)
-		k = (signed char)va_arg(tab->args,unsigned int);
+		k = (unsigned char)va_arg(tab->args,unsigned int);
 	else if (mod->l == 1)
-		k = (long int)va_arg(tab->args,unsigned long);
+		k = (unsigned long int)va_arg(tab->args,unsigned long);
 	else if (mod->l == 2)
-		k = (long long int)va_arg(tab->args,unsigned long long);
+		k = (unsigned long long int)va_arg(tab->args,unsigned long long);
 	else
 		k = va_arg(tab->args,unsigned int);
 	return (k);
