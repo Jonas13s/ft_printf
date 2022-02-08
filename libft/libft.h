@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 12:38:11 by joivanau          #+#    #+#             */
-/*   Updated: 2021/12/14 02:27:20 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/07 03:40:31 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_strnequ(char const *s1, char const *s2, size_t n);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s);
-char	*ft_itoa(int n);
+char	*ft_itoa(long int n);
 char	**ft_strsplit(char const *s, char c);
 /*	ADDTIONAL FUNCTIONS	*/
 int		ft_isspace(int c);

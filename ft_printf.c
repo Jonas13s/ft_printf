@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:01:49 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/05 21:55:33 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 02:29:31 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,17 @@ int	ft_printf(const char *format, ...)
 	free (mod);
 	return (length);
 }
-
+/*
 int	main(void)
 {
 	//ft_printf("%s\n", "");
-	double a = 1;
-	void *p = ft_strdup("abc");
 	//static char *s_hidden = "hi low\0don't print me lol\0";
 	int k, l = 0;
-	k = printf("% #-+0d");
+	k = printf("og:%.2x\n", 5427);
 	//printf("a\n");
-	l = ft_printf("% #-+0d\n");
+	l = ft_printf("ft:%.2x\n", 5427);
 	//printf("b\n");
 	printf("og: %d ft: %d\n",k, l);
 	//printf("\n%d\n", k);
 }
+*/

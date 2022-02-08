@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joivanau <joivanau@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 14:49:09 by joivanau          #+#    #+#             */
-/*   Updated: 2021/11/12 12:32:54 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/07 03:40:29 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	itoa_assist(long int l)
 	return (count);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long int n)
 {
 	char			*str;
 	long int		l;

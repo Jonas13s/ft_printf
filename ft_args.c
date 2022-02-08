@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 14:46:49 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/05 21:46:56 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 02:36:23 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,32 @@ int	add_flags(const char *format, t_print *tab)
 	return (i);
 }
 
+static int	number_read(const char *format, t_print *tab, int mode, size_t i)
+{
+	if (mode == 1)
+	{
+		while (ft_isnumber(format[i]))
+		{
+			if (tab->width == 0)
+				tab->width = format[i++] - '0';
+			else
+				tab->width = (tab->width * 10) + (format[i++] - '0');
+		}
+	}
+	if (mode == 2)
+	{
+		while (ft_isnumber(format[i]))
+		{
+			if (tab->precision == 0)
+				tab->precision = format[i++] - '0';
+			else
+				tab->precision = (tab->precision * 10) + (format[i++] - '0');
+		}
+	}
+	//printf("%ld\n", i);
+	return (i);
+}
+
 int	add_width(const char *format, t_print *tab)
 {
 	size_t	i;
@@ -58,17 +84,7 @@ int	add_width(const char *format, t_print *tab)
 		tab->total_length += i;
 		return (i);
 	}
-	while (ft_isnumber(format[i]))
-	{
-		if (tab->width == 0)
-			tab->width = format[i] - '0';
-		else
-		{
-			tab->width = tab->width * 10;
-			tab->width += format[i] - '0';
-		}
-		i++;
-	}
+	i = number_read(format, tab, 1, i);
 	tab->total_length += i;
 	return (i);
 }
@@ -91,17 +107,15 @@ int	add_presicion(const char *format, t_print *tab)
 				tab->dot = 0;
 			}
 			i++;
+			tab->total_length += i;
+			return (i);
 		}
 		while (ft_isnumber(format[i]))
 		{
 			if (tab->precision == 0)
-				tab->precision = format[i] - '0';
+				tab->precision = format[i++] - '0';
 			else
-			{
-				tab->precision = tab->precision * 10;
-				tab->precision += format[i] - '0';
-			}
-			i++;
+				tab->precision = (tab->precision * 10) + (format[i++] - '0');
 		}
 	}
 	tab->total_length += i;
@@ -151,32 +165,17 @@ int	add_conversion(const char *format, t_print *tab, t_length *mod)
 		tab->content_size = print_unsignedint(tab, mod);
 	else if (*format == 'f')
 		tab->content_size = print_float(tab, mod);
-	else
-		tab->content_size = -1;
-	tab->total_length++;
+	if (*format != '\0')
+		tab->total_length++;
 	return (1);
 }
 
 int	ft_convert_args(const char *format, t_print *tab, t_length *mod)
 {
-	int	k;
-
 	format += add_flags(format, tab);
 	format += add_width(format, tab);
 	format += add_presicion(format, tab);
 	format += add_lengthmod(format, mod, tab);
-	k += add_conversion(format, tab, mod);
-	if (k == 0)
-	{
-		format -= tab->total_length;
-		print_percent();
-		tab->content_size++;
-		if (*format == '*')
-		{
-			ft_putnbr(tab->width);
-			tab->content_size += number_count(tab->width);
-		}
-	}
-	format += k;
+	format += add_conversion(format, tab, mod);
 	return (1);
 }

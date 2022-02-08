@@ -2,8 +2,11 @@
 
 int main()
 {
-	float k = 1.15;
-
-	printf("%.1f\n", 0.1500001);
+	int i =0;
+	while(i++ > 10)
+	{
+		printf("%d\n", i);
+		break;
+	}
 	return (0);
 }
