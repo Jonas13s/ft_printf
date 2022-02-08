@@ -6,13 +6,13 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:23:41 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/06 03:00:37 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 04:38:22 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_sign(t_print *tab,long long i)
+static int	print_sign(t_print *tab, long long i)
 {
 	if (i < 0)
 		ft_putchar('-');
@@ -25,9 +25,9 @@ static int	print_sign(t_print *tab,long long i)
 
 static int	print_digits(t_print *tab, long long i)
 {
-	char *s;
+	char	*s;
 
-	if(i < 0)
+	if (i < 0)
 		i *= -1;
 	if (tab->dot == 1 && tab->precision == 0 && i == 0)
 		return (0);
@@ -40,7 +40,7 @@ static int	print_digits(t_print *tab, long long i)
 	return (0);
 }
 
-static int	print_left_allign(t_print *tab,long long i)
+static int	initialize_len(t_print *tab, long long i)
 {
 	int	k;
 
@@ -52,85 +52,36 @@ static int	print_left_allign(t_print *tab,long long i)
 		k++;
 	if (tab->dot == 1 && tab->precision == 0 && i == 0)
 		k = 0;
-	if (tab->zero)
-	{
-		print_sign(tab, i);
-		ft_print_char('0', tab->precision - number_count(i));
-		ft_print_char('0', tab->width - k);
-		print_digits(tab, i);
-	}
-	else
-	{
-		print_sign(tab, i);
-		ft_print_char('0', (tab->precision - number_count(i)));
-		print_digits(tab, i);
-		ft_print_char(' ', tab->width - k);
-	}
-	if (tab->width > k)
-		k = tab->width;
 	return (k);
 }
 
-static int	print_right_allign(t_print *tab,long long i)
+static int	print_fully(t_print *tab, long long i)
 {
-	int	k;
+	int	len;
 
-	if (tab->precision > number_count(i))
-		k = tab->precision;
-	else
-		k = number_count(i);
-	if (i < 0 || tab->space || tab->plus)
-		k++;
-	if (tab->dot == 1 && tab->precision == 0 && i == 0)
-		k = 0;
-	if (tab->zero)
-	{
-		print_sign(tab, i);
-		ft_print_char('0', tab->precision - number_count(i));
-		ft_print_char('0', tab->width - k);
-		print_digits(tab, i);
-	}
-	else
-	{
-		ft_print_char(' ', tab->width - k);
-		print_sign(tab, i);
-		ft_print_char('0', (tab->precision - number_count(i)));
-		print_digits(tab, i);
-	}
-	if (tab->width > k)
-		k = tab->width;
-	return (k);
+	len = initialize_len(tab, i);
+	if (!tab->minus && !tab->zero)
+		ft_print_char(' ', tab->width - len);
+	print_sign(tab, i);
+	if (tab->zero && !tab->minus)
+		ft_print_char('0', tab->width - len);
+	ft_print_char('0', tab->precision - number_count(i));
+	print_digits(tab, i);
+	if (tab->minus)
+		ft_print_char(' ', tab->width - len);
+	return (len);
 }
-
-static long long	print_read(t_print *tab, t_length *mod)
-{
-	long long k;
-
-	if (mod->h == 1)
-		k = (short int)va_arg(tab->args, int);
-	else if (mod->h == 2)
-		k = (signed char)va_arg(tab->args, int);
-	else if (mod->l == 1)
-		k = (long int)va_arg(tab->args, long);
-	else if (mod->l == 2)
-		k = (long long int)va_arg(tab->args, long long);
-	else
-		k = va_arg(tab->args, int);
-	return (k);
-}
-
 
 int	print_signedint(t_print *tab, t_length *mod)
 {
 	unsigned long long	i;
-	int			count;
+	int					count;
 
-	i = print_read(tab, mod);
+	i = signedint_value(tab, mod);
 	if ((tab->dot && tab->zero) || (tab->zero && tab->minus))
 		tab->zero = 0;
-	if (tab->minus)
-		count = print_left_allign(tab, i);
-	else
-		count = print_right_allign(tab, i);
+	count = print_fully(tab, i);
+	if (tab->width > count)
+		count = tab->width;
 	return (count);
 }

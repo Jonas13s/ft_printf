@@ -6,13 +6,13 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:28:41 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/02 00:28:10 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 04:51:51 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*print_width(t_print *tab)
+static void	print_width(t_print *tab)
 {
 	char	*s;
 	char	c;
@@ -37,7 +37,6 @@ static char	*print_width(t_print *tab)
 		write(1, &c, 1);
 	}
 	free(s);
-	return (s);
 }
 
 int	print_char(t_print *tab)

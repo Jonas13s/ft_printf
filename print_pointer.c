@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 15:54:47 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/01 01:14:00 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 04:24:30 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,47 +47,18 @@ static int	print_start(t_print *tab)
 	return (0);
 }
 
-static int	printing_hex(char *s, t_print *tab)
-{
-	ssize_t	k;
-
-	k = 0;
-	if (tab->null)
-	{
-		write(1, s, ft_strlen(s));
-		return (ft_strlen(s));
-	}
-	while (s[k] != '\0')
-	{
-		ft_putchar(s[k]);
-		k++;
-	}
-	return (k);
-}
-
-static int	printf_right_allign(t_print *tab, char *s)
+static int	print_fully(t_print *tab, char *s)
 {
 	int	len;
 
 	len = content_size(tab, s);
-	ft_print_char(' ', tab->width - tab->content_size);
+	if (!tab->minus)
+		ft_print_char(' ', tab->width - tab->content_size);
 	print_start(tab);
 	ft_print_char('0', tab->precision - len);
-	printing_hex(s, tab);
-	if (tab->width > tab->content_size)
-		tab->content_size = tab->width;
-	return (0);
-}
-
-static int	printf_left_allign(t_print *tab, char *s)
-{
-	int	len;
-
-	len = content_size(tab, s);
-	print_start(tab);
-	ft_print_char('0', tab->precision - len);
-	printing_hex(s, tab);
-	ft_print_char(' ', tab->width - tab->content_size);
+	ft_putstr(s);
+	if (tab->minus)
+		ft_print_char(' ', tab->width - tab->content_size);
 	if (tab->width > tab->content_size)
 		tab->content_size = tab->width;
 	return (0);
@@ -106,10 +77,7 @@ int	print_pointer(t_print *tab)
 	}
 	else
 		s = hex_conv(p, HEXALOW);
-	if (tab->minus)
-		printf_left_allign(tab, s);
-	else
-		printf_right_allign(tab, s);
+	print_fully(tab, s);
 	ft_strdel(&s);
 	return (tab->content_size);
 }

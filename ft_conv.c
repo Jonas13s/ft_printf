@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 10:14:39 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/31 14:18:23 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 03:37:23 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	print_percent(void)
 
 int	number_count(long long int i)
 {
-	int	count;
+	int		count;
 	char	*s;
 
 	if (i < 0)
@@ -51,8 +51,12 @@ char	*hex_conv(unsigned long long i, char *base)
 	base_len = ft_strlen(base);
 	number = i;
 	size = 0;
-	while (i /= base_len)
-		size++;
+	while (i)
+	{
+		i /= base_len;
+		if (i)
+			size++;
+	}
 	string = ft_strnew(size + 1);
 	if (!string)
 		return (0);
@@ -64,4 +68,14 @@ char	*hex_conv(unsigned long long i, char *base)
 	if (size == 0 && string[1] == '\0')
 		string[0] = '0';
 	return (string);
+}
+
+int	ft_convert_args(const char *format, t_print *tab, t_length *mod)
+{
+	format += add_flags(format, tab);
+	format += add_width(format, tab);
+	format += add_presicion(format, tab);
+	format += add_lengthmod(format, mod, tab);
+	format += add_conversion(format, tab, mod);
+	return (tab->total_length);
 }

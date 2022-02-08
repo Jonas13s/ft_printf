@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:01:49 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/08 02:29:31 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 03:37:30 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printf2(const char *format, t_print *tab, t_length *mod)
 {
-	size_t	len;
+	ssize_t	len;
 
 	len = 0;
 	while (*format != '\0')
@@ -29,8 +29,7 @@ int	ft_printf2(const char *format, t_print *tab, t_length *mod)
 				len = -1;
 				break ;
 			}
-			ft_convert_args(format, tab, mod);
-			format += tab->total_length;
+			format += ft_convert_args(format, tab, mod);
 			len += tab->content_size;
 		}
 		else if (*format != '%')
@@ -66,9 +65,9 @@ int	main(void)
 	//ft_printf("%s\n", "");
 	//static char *s_hidden = "hi low\0don't print me lol\0";
 	int k, l = 0;
-	k = printf("og:%.2x\n", 5427);
+	k = printf("og:%d\n", 0);
 	//printf("a\n");
-	l = ft_printf("ft:%.2x\n", 5427);
+	l = ft_printf("ft:%d\n", 0);
 	//printf("b\n");
 	printf("og: %d ft: %d\n",k, l);
 	//printf("\n%d\n", k);

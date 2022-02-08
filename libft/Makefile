@@ -6,7 +6,7 @@
 #    By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 14:55:31 by joivanau          #+#    #+#              #
-#    Updated: 2021/12/14 02:45:21 by joivanau         ###   ########.fr        #
+#    Updated: 2022/02/08 04:47:58 by joivanau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME):
 	@cc -Wall -Wextra -Werror -c $(FILES)
-	@ar rv $(NAME) $(LIBRARY)
+	@ar rc $(NAME) $(LIBRARY)
 clean:
 	@rm -rf $(LIBRARY)
 fclean: clean

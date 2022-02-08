@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:24:47 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/25 14:58:24 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 03:39:33 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	init_fstruct(t_length *tab)
 {
 	tab->h = 0;
 	tab->l = 0;
-	tab->L = 0;
+	tab->lupper = 0;
 }

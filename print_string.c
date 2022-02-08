@@ -6,13 +6,13 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:40:49 by joivanau          #+#    #+#             */
-/*   Updated: 2022/01/25 15:21:47 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/02/08 04:50:03 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*format_presicion(t_print *tab, char *text)
+static char	*format_presicion(t_print *tab, char *text)
 {
 	int		k;
 	char	*temp;
@@ -36,7 +36,7 @@ char	*format_presicion(t_print *tab, char *text)
 	return (text);
 }
 
-char	*assign_str(t_print *tab)
+static char	*assign_str(t_print *tab)
 {
 	char	*temp;
 	char	*str;
@@ -52,7 +52,7 @@ char	*assign_str(t_print *tab)
 	return (str);
 }
 
-char	*format_string(t_print *tab)
+static char	*format_string(t_print *tab)
 {
 	char	*s;
 	char	*str;
