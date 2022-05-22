@@ -6,7 +6,7 @@
 /*   By: joivanau <joivanau@hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:06:25 by joivanau          #+#    #+#             */
-/*   Updated: 2022/02/08 04:36:41 by joivanau         ###   ########.fr       */
+/*   Updated: 2022/05/23 00:29:52 by joivanau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 # define FT_PRINTF_H
 # include "libft.h"
 # include <stdarg.h>
-# include <stdio.h>
 # include <inttypes.h>
 
 # define DIGITS		"0123456789"
 # define HEXALOW	"0123456789abcdef"
 # define HEXAUPP	"0123456789ABCDEF"
 # define OCTAL		"01234567"
+# define RED		"\033[0;31m"
+# define BLACK		"\033[0;30m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define PURPLE		"\033[0;35m"
+# define CYAN		"\033[0;36m"
+# define WHITE		"\033[0;37m"
+# define EOC		"\033[0m"
 
 typedef struct s_print
 {
@@ -77,4 +85,7 @@ int			add_lengthmod(const char *format, t_length *mod, t_print *tab);
 int			add_presicion(const char *format, t_print *tab);
 int			add_width(const char *format, t_print *tab);
 int			add_flags(const char *format, t_print *tab);
+/* color set */
+int			is_color(const char *format);
+int			change_color(const char *format);
 #endif
